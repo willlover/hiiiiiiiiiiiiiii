@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     var turntable = document.getElementById('turntable'),
         turntableArm = document.getElementById('turntable-arm'),
@@ -11,8 +10,14 @@ document.addEventListener('DOMContentLoaded', function () {
     var currentSongIndex = 0;
 
     var play = function () {
-        speaker.src = songs[currentSongIndex];
-        speaker.play();
+        if (songs.length > 0) {
+            speaker.src = songs[currentSongIndex];
+            speaker.play().then(() => {
+                console.log('Playback started successfully');
+            }).catch((error) => {
+                console.error('Error starting playback:', error);
+            });
+        }
     };
 
     var stop = function () {
